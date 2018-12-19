@@ -45,7 +45,7 @@ int server_handshake(int *to_client) {
   returns the file descriptor for the downstream pipe.
   =========================*/
 int client_handshake(int *to_server) {
-  mkfifo("cli_pi",0644);
+  mkfifo("cli_pi",0666);
   printf("Client: Created client to server pipe\n");
 
   int client_server = open(SERVER_PIPE,O_WRONLY);
