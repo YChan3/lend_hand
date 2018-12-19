@@ -45,20 +45,20 @@ int server_handshake(int *to_client) {
   returns the file descriptor for the downstream pipe.
   =========================*/
 int client_handshake(int *to_server) {
-  mkfifo("client_pipe",0644);
+  mkfifo("cli_pi",0644);
   printf("Client: Created client to server pipe\n");
 
   int client_server = open(SERVER_PIPE,O_WRONLY);
-  char pipe_name[HANDSHAKE_BUFFER_SIZE] = "client_pipe";
+  char pipe_name[HANDSHAKE_BUFFER_SIZE] = "cli_pi";
   write(client_server, pipe_name, HANDSHAKE_BUFFER_SIZE);
   printf("Client: Sent client to server pipe name\n");
 
-  int server_client = open("client_pipe",O_RDONLY);
+  int server_client = open("cli_pi",O_RDONLY);
   char acknowledgement[HANDSHAKE_BUFFER_SIZE];
   read(server_client, acknowledgement, HANDSHAKE_BUFFER_SIZE);
   printf("Client: Recieved %s\n", acknowledgement);
 
-  remove("client_pipe");
+  remove("cli_pi");
   printf("Client: Removed client to server pipe\n");
 
   write(server_client, acknowledgement, HANDSHAKE_BUFFER_SIZE);
