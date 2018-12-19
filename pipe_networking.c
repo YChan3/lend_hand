@@ -27,7 +27,7 @@ int server_handshake(int *to_client) {
   printf("Server: sent %s to client\n",ACK);
 
   char acknowledgement[HANDSHAKE_BUFFER_SIZE];
-  read(server_client, acknowledgement, HANDSHAKE_BUFFER_SIZE);
+  read(client_server, acknowledgement, HANDSHAKE_BUFFER_SIZE);
   printf("Server: Recieved %s\n", acknowledgement);
 
   *to_client = server_client;
@@ -61,7 +61,7 @@ int client_handshake(int *to_server) {
   remove("cli_pi");
   printf("Client: Removed client to server pipe\n");
 
-  write(server_client, acknowledgement, HANDSHAKE_BUFFER_SIZE);
+  write(client_server, acknowledgement, HANDSHAKE_BUFFER_SIZE);
   printf("Client: Sent acknowledgement back to server\n");
 
   *to_server = client_server;
