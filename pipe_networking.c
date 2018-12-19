@@ -13,7 +13,7 @@ char * SERVER_PIPE = "WKP";
 int server_handshake(int *to_client) {
   mkfifo(SERVER_PIPE,0666);
   printf("Server: Created server to client pipe\n");
-  int client_server = open("SERVER_PIPE",O_RDONLY);
+  int client_server = open(SERVER_PIPE,O_RDONLY);
 
   char pipe_name[HANDSHAKE_BUFFER_SIZE];
   read(client_server, pipe_name, HANDSHAKE_BUFFER_SIZE);
